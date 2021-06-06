@@ -2,8 +2,8 @@
 # Utilities for current neural network.
 # All Copyright reserved (c) based on LICENSE.
 # --------------------------------------------
-import abc
 
+import abc
 import numpy as np
 
 from PIL import Image
@@ -15,9 +15,24 @@ from keras.optimizer_v1 import SGD
 from utils import list_files, get_parent
 
 class ModelDefinition(abc.ABC):
+    """Define new sequential models for neural networks. """
+
     @abc.abstractmethod
     def define(self, num_classes, target_size, **kwargs):
+        """
+        Return a new sequential neural network model with passed arguments.
+
+        >> Available arguments
+
+            * num_classes: number of classes that will be classify (necessary).
+            * target_size: specific size that each image classified will has (necessary).
+            * loss: loss function used during training compilation (default: mse).
+            * optimizer: optimizer used during training compilation (default: SGD(lr=0.1)).
+            * metrics: metrics used during training compilation (default: ['accuracy']).
+        """
         pass
+
+# _________________ Versions of neural network models for fish classification _________________
 
 class ModelDefinitionLeakyRelu(ModelDefinition):
     def define(self, num_classes, target_size, **kwargs):
@@ -68,9 +83,23 @@ class ModelDefinitionTwoDense(ModelDefinition):
         return model
 
 def define_model(num_classes, target_size=(150, 150), **kwargs):
+    """Return the best neural network model founded for fish classification. """
     return ModelDefinitionLeakyRelu().define(num_classes, target_size, **kwargs)
 
+# ________________________ Training and testing ________________________
+
 def train_model(model, train_generator, validation_generator, **kwargs):
+    """Train passed model with EarlyStopping and passed arguments.
+
+    >> Available arguments
+
+        * model: compiled neural network model (necessary)
+        * train_generator: ImageDataGenerator for training (necessary)
+        * validation_generator: ImageDataGenerator for validation (necessary)
+        * epochs: maximum number of epochs (default: 150)
+        * patience: patience to wait for EarlyStopping (default: 3)
+        * steps_per_epoch: steps for each epoch executed (default: 40)
+    """
     epochs = kwargs.get('epochs', 150)
     patience = kwargs.get('patience', 3)
     steps_per_epoch = kwargs.get('steps_per_epoch', 40)
@@ -91,6 +120,7 @@ def train_model(model, train_generator, validation_generator, **kwargs):
     return history
 
 def test_model(model, test_generator):
+    """Test passed model using a ImageDataGenerator testing instance. """
     test_images = list_files('./dataset/test', mode='only_files')
 
     input_shape1, input_shape2 = test_generator.target_size

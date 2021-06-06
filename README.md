@@ -8,11 +8,17 @@ obtained from a Kaggle dataset (see https://www.kaggle.com/crowww/a-large-scale-
 
 ## Results
 
-![Training steps](https://github.com/losedavidpb/nn-fish-classifier/images/output_train.png "Training output")
+* ### Training Output
 
-![Accuracy and Loss Evolution](https://github.com/losedavidpb/nn-fish-classifier/images/plot_accuracy_loss.png "Accuracy and Loss Evolution")
+![Training steps](images/output_train.jpg "Training Output")
 
-![Confusion matrix](https://github.com/losedavidpb/nn-fish-classifier/images/plot_confusion_matrix.png "Confusion matrix")
+* ### Accuracy and Loss Evolution
+
+![Accuracy and Loss Evolution](images/plot_accuracy_loss.jpg "Accuracy and Loss Evolution")
+
+* ### Confusion Matrix
+
+![Confusion Matrix](images/plot_confusion_matrix.jpg "Confusion Matrix")
 
 ## Hyperparameters and Parameters
 
@@ -34,7 +40,7 @@ obtained from a Kaggle dataset (see https://www.kaggle.com/crowww/a-large-scale-
 
 | Name  | Definition | Value |
 | ----  | ---------- | ----- |
-| Number of Epochs | Maximum number of iterations | 20 |
+| Number of Epochs | Maximum number of iterations | 10 |
 | Steps per Epoch  | Total steps of each epoch executed | 70 |
 | Batch size | Number of files loaded during training steps | 30 |
 | Patience   | Maximum tries to improve val_accuracy before exit | 3 |
@@ -52,3 +58,8 @@ obtained from a Kaggle dataset (see https://www.kaggle.com/crowww/a-large-scale-
 | Brightness range | Brightness range for data augmentation | (0.2, 0.8) |
 | Horizontal flip | Horizontal flip for data augmentation | True |
 | Vertical flip | Vertical flip for data augmentation | True |
+
+## Authors
+
+- losedavidpb: [https://github.com/losedavidpb](https://github.com/losedavidpb)
+- SergioULPGC: [https://github.com/SergioULPGC](https://github.com/SergioULPGC)
