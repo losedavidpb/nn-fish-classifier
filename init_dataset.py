@@ -57,14 +57,20 @@ def prepare_dataset(classes, porc_train, porc_test):
         print("OK")
 
 def init_train_generator(**kwargs):
-    target_size = kwargs.get('target_size', (150, 150))
-    rescale = kwargs.get('rescale', 1. / 255)
-    rotation_range = kwargs.get('rotation_range', 10)
-    zoom_range = kwargs.get('zoom_range', 0.5)
     batch_size = kwargs.get('batch_size', 20)
     class_mode = kwargs.get('class_mode', 'binary')
+
+    target_size = kwargs.get('target_size', (150, 150))
+    rescale = kwargs.get('rescale', 1. / 255)
+
+    rotation_range = kwargs.get('rotation_range', 10)
+    zoom_range = kwargs.get('zoom_range', 0.5)
     width_shift_range = kwargs.get('width_shift_range', 0.2)
     height_shift_range = kwargs.get('height_shift_range', 0.2)
+    brightness_range = kwargs.get('brightness_range', (0.2, 0.8))
+
+    horizontal_flip = kwargs.get('horizontal_flip', False)
+    vertical_flip = kwargs.get('vertical_flip', False)
 
     train_data_gen = ImageDataGenerator(
         rescale=rescale,
@@ -72,8 +78,9 @@ def init_train_generator(**kwargs):
         zoom_range=zoom_range,
         width_shift_range=width_shift_range,
         height_shift_range=height_shift_range,
-        horizontal_flip=True,
-        vertical_flip=True
+        horizontal_flip=horizontal_flip,
+        vertical_flip=vertical_flip,
+        brightness_range=brightness_range
     )
 
     return train_data_gen.flow_from_directory(
@@ -100,11 +107,8 @@ def init_test_generator(**kwargs):
 
 def delete_dataset(classes):
     for class_name in classes:
-        class_train_path = './dataset/train/' + class_name
-        class_test_path = './dataset/test/' + class_name
-
-        remove_files(class_train_path)
-        remove_files(class_test_path)
+        remove_files('./dataset/train/' + class_name)
+        remove_files('./dataset/test/' + class_name)
 
     remove_file('./dataset/train/')
     remove_file('./dataset/test/')

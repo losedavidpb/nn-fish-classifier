@@ -4,7 +4,7 @@
 
 from init_dataset import prepare_dataset, init_train_generator
 from init_dataset import init_test_generator, delete_dataset
-from visualizer import show_dataset_files, plot_history
+from visualizer import show_dataset_files, plot_history, plot_confusion_matrix
 from neural_network import define_model, train_model, test_model
 from utils import list_files, get_parent
 import tensorflow as tf
@@ -52,6 +52,9 @@ rotation_range = 30
 zoom_range = 0.7
 width_shift_range = 0.1
 height_shift_range = 0.1
+horizontal_flip = True
+vertical_flip = True
+brightness_range = (0.2, 0.8)
 
 if __name__ == '__main__':
     prepare_dataset(classes, porc_train, porc_test)
@@ -66,6 +69,9 @@ if __name__ == '__main__':
         height_shift_range=height_shift_range,
         class_mode=class_mode,
         batch_size=batch_size,
+        horizontal_flip=horizontal_flip,
+        vertical_flip=vertical_flip,
+        brightness_range=brightness_range
     )
 
     test_generator = init_test_generator(
@@ -87,6 +93,7 @@ if __name__ == '__main__':
 
     test_model(model, test_generator)
     plot_history(history)
+    plot_confusion_matrix(model)
     delete_dataset(classes)
 
     answer = input("Do you want to save current model? ")

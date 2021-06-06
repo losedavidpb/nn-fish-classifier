@@ -29,14 +29,17 @@ def show_dataset_files():
     for file in test_files: print(file)
 
 def plot_history(history):
-    plt.title('Training and Validation Accuracy')
+    plt.title('Fish Classifier Evolution')
     plt.xlabel('Number of Epochs')
     plt.ylabel('Accuracy')
     plt.grid()
 
     plt.xticks([i for i in range(0, len(history.history['accuracy']))])
     plt.plot(history.history['accuracy'], label='Training Accuracy')
-    plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+    plt.plot(history.history['loss'], label='Loss value')
     plt.legend(loc='upper left')
 
     plt.show()
+
+def plot_confusion_matrix(model):
+    pass
