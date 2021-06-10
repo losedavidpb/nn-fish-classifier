@@ -8,10 +8,6 @@ obtained from a Kaggle dataset (see https://www.kaggle.com/crowww/a-large-scale-
 
 ## Results
 
-* ### Training Output
-
-![Training steps](images/output_train.jpg "Training Output")
-
 * ### Accuracy and Loss Evolution
 
 ![Accuracy and Loss Evolution](images/plot_accuracy_loss.jpg "Accuracy and Loss Evolution")
@@ -58,6 +54,14 @@ obtained from a Kaggle dataset (see https://www.kaggle.com/crowww/a-large-scale-
 | Brightness range | Brightness range for data augmentation | (0.2, 0.8) |
 | Horizontal flip | Horizontal flip for data augmentation | True |
 | Vertical flip | Vertical flip for data augmentation | True |
+
+* ### Models
+
+| Name | Structure | Loss | Accuracy | Validation Loss | Validation Accuracy |
+| ---- | --------- | ---- | -------- | --------------- | ------------------- |
+| ModelDefinitionTwoDense | <ul><li>Conv2D(filters=32, kernel=(3, 3), activation=relu)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>Flatten()</li> <li>Dense(128, activation=relu)</li> <li>Dropout(0.25)</li> <li>Dense(64, activation=relu)</li> <lI>Dense(4, activation=softmax)</li></ul>| 1.2345 | 0.4949 | 1.0191 | 0.6875 |
+| ModelDefinitionLeakyRelu | <ul><li>Conv2D(filters=128, kernel=(3, 3), activation=relu)</li> <li>LeakyReLU(alpha=0.1)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>Flatten()</li> <li>Dense(64, activation=relu)</li> <li>Dropout(0.5)</li> <li>Dense(32, activation=relu)</li> <li>Dense(4, activation=softmax)</li></ul> | 1.2832 | 0.4655 | 1.0627 | 0.6625 |
+| ModelDefinitionLeakyReluMoreConv | <ul><li>Conv2D(filters=128, kernel=(3, 3), activation=relu)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>LeakyReLU(alpha=0.1)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>Flatten()</li> <li>Dense(64, activation=relu)</li> <li>Dropout(0.5)</li> <li>Dense(32, activation=relu)</li> <li>Dense(4, activation=softmax)</li></ul> | 1.3145 | 0.3952 | 1.1267 | 0.6525 |
 
 ## Authors
 

@@ -74,14 +74,16 @@ def _init_generators():
         batch_size=batch_size,
         horizontal_flip=horizontal_flip,
         vertical_flip=vertical_flip,
-        brightness_range=brightness_range
+        brightness_range=brightness_range,
+        shuffle=True
     )
 
     test_generator = init_test_generator(
         target_size=target_size,
         rescale=rescale,
         class_mode=class_mode,
-        batch_size=batch_size
+        batch_size=batch_size,
+        suffle=False
     )
 
     return train_generator, test_generator
@@ -106,7 +108,7 @@ def _train_and_test(train_generator, test_generator):
         epochs=epochs, steps_per_epoch=steps_per_epoch, patience=patience
     )
 
-    test_model(model, test_generator)
+    test_model(model, test_generator, verbose_each_image=False)
     return model, history
 
 def _visualize_results(history, model, test_generator):
@@ -151,6 +153,15 @@ def _execute_for_train_test():
         train_gen, test_gen = _init_generators()
 
     model, history = _train_and_test(train_gen, test_gen)
+
+    test_gen = init_test_generator(
+        target_size=target_size,
+        rescale=rescale,
+        class_mode=class_mode,
+        batch_size=batch_size,
+        shuffle=False,
+    )
+
     _visualize_results(history, model, test_gen)
 
     # Save current model if user wants
@@ -166,7 +177,8 @@ def _execute_for_use():
         target_size=target_size,
         rescale=rescale,
         class_mode=class_mode,
-        batch_size=batch_size
+        batch_size=batch_size,
+        shuffle=False,
     )
 
     # test_model(model, test_generator)
@@ -176,6 +188,7 @@ def _execute():
     _ask_action_with_options(
         "What do you want to do? ",
         options_with_func={
+            'restore': lambda: restore_dataset(classes),
             'train': lambda: _execute_for_train_test(),
             'use': lambda: _execute_for_use()
         }

@@ -89,9 +89,11 @@ def init_train_generator(**kwargs):
         * brightness_range: brightness range used for data augmentation (default: (0.2,0.8))
         * horizontal_flip: images will be flipped horizontally whether is true (default: False)
         * vertical_flip: images will be flipped vertically whether is true (default: False)
+        * shuffle: images will be shuffled whether is true (default: True)
     """
     batch_size = kwargs.get('batch_size', 20)
     class_mode = kwargs.get('class_mode', 'binary')
+    shuffle = kwargs.get('shuffle', True)
 
     target_size = kwargs.get('target_size', (150, 150))
     rescale = kwargs.get('rescale', 1. / 255)
@@ -120,7 +122,8 @@ def init_train_generator(**kwargs):
         './dataset/train',
         target_size=target_size,
         batch_size=batch_size,
-        class_mode=class_mode
+        class_mode=class_mode,
+        shuffle=shuffle
     )
 
 def init_test_generator(**kwargs):
@@ -132,11 +135,13 @@ def init_test_generator(**kwargs):
             * class_mode: class mode, generally categorical used (default: binary)
             * target_size: each image loaded will has target_size with and height (default: (150, 150))
             * rescale: rescale used for data augmentation (default: 1./255)
+            * shuffle: images will be shuffled whether is true (default: True)
         """
     target_size = kwargs.get('target_size', (150, 150))
     rescale = kwargs.get('rescale', 1. / 255)
     batch_size = kwargs.get('batch_size', 20)
     class_mode = kwargs.get('class_mode', 'binary')
+    shuffle = kwargs.get('shuffle', True)
 
     test_data_gen = ImageDataGenerator(rescale=rescale)
 
@@ -144,7 +149,8 @@ def init_test_generator(**kwargs):
         './dataset/test',
         target_size=target_size,
         batch_size=batch_size,
-        class_mode=class_mode
+        class_mode=class_mode,
+        shuffle=shuffle
     )
 
 def delete_dataset(classes):

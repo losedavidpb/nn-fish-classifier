@@ -92,7 +92,7 @@ class ModelDefinitionTwoDense(ModelDefinition):
         input_shape1, input_shape2 = target_size
 
         model = Sequential()
-        model.add(Conv2D(filters=32, kernel_size=(3, 3), activation='relu', input_shape=(input_shape1, input_shape2, 3)))
+        model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(input_shape1, input_shape2, 3)))
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.25))
         model.add(Flatten())
@@ -108,7 +108,7 @@ class ModelDefinitionTwoDense(ModelDefinition):
 
 def define_model(num_classes, target_size=(150, 150), **kwargs):
     """Return the best neural network model founded for fish classification. """
-    return ModelDefinitionLeakyReluMoreConv().define(num_classes, target_size, **kwargs)
+    return ModelDefinitionTwoDense().define(num_classes, target_size, **kwargs)
 
 # ________________________ Training and testing ________________________
 
@@ -143,7 +143,7 @@ def train_model(model, train_generator, validation_generator, **kwargs):
 
     return history
 
-def test_model(model, test_generator):
+def test_model(model, test_generator, verbose_each_image=True):
     """Test passed model using a ImageDataGenerator testing instance. """
     test_images = list_files('./dataset/test', mode='only_files')
 
@@ -164,8 +164,10 @@ def test_model(model, test_generator):
             if classes.get(class_name) == class_num:
                 if class_num != expected: num_errors += 1
 
-                str_format = "Image<{}>: It's a {}"
-                print(str.format(str_format, image_dir, class_name), sep="")
+                if verbose_each_image:
+                    str_format = "Image<{}>: It's a {}"
+                    print(str.format(str_format, image_dir, class_name), sep="")
+
                 break
 
     num_correct = num_total - num_errors
