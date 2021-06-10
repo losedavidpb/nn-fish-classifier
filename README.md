@@ -57,11 +57,17 @@ obtained from a Kaggle dataset (see https://www.kaggle.com/crowww/a-large-scale-
 
 * ### Models
 
-| Name | Structure | Loss | Accuracy | Validation Loss | Validation Accuracy |
-| ---- | --------- | ---- | -------- | --------------- | ------------------- |
-| ModelDefinitionTwoDense | <ul><li>Conv2D(filters=32, kernel=(3, 3), activation=relu)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>Flatten()</li> <li>Dense(128, activation=relu)</li> <li>Dropout(0.25)</li> <li>Dense(64, activation=relu)</li> <lI>Dense(4, activation=softmax)</li></ul>| 1.2345 | 0.4949 | 1.0191 | 0.6875 |
-| ModelDefinitionLeakyRelu | <ul><li>Conv2D(filters=128, kernel=(3, 3), activation=relu)</li> <li>LeakyReLU(alpha=0.1)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>Flatten()</li> <li>Dense(64, activation=relu)</li> <li>Dropout(0.5)</li> <li>Dense(32, activation=relu)</li> <li>Dense(4, activation=softmax)</li></ul> | 1.2832 | 0.4655 | 1.0627 | 0.6625 |
-| ModelDefinitionLeakyReluMoreConv | <ul><li>Conv2D(filters=128, kernel=(3, 3), activation=relu)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>LeakyReLU(alpha=0.1)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>Flatten()</li> <li>Dense(64, activation=relu)</li> <li>Dropout(0.5)</li> <li>Dense(32, activation=relu)</li> <li>Dense(4, activation=softmax)</li></ul> | 1.3145 | 0.3952 | 1.1267 | 0.6525 |
+| Name | Structure |
+| ---- | --------- |
+| ModelDefinitionTwoDense | <ul><li>Conv2D(filters=32, kernel=(3, 3), activation=relu)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>Flatten()</li> <li>Dense(128, activation=relu)</li> <li>Dropout(0.25)</li> <li>Dense(64, activation=relu)</li> <lI>Dense(4, activation=softmax)</li></ul> |
+| ModelDefinitionLeakyRelu | <ul><li>Conv2D(filters=128, kernel=(3, 3), activation=relu)</li> <li>LeakyReLU(alpha=0.1)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>Flatten()</li> <li>Dense(64, activation=relu)</li> <li>Dropout(0.5)</li> <li>Dense(32, activation=relu)</li> <li>Dense(4, activation=softmax)</li></ul> |
+| ModelDefinitionLeakyReluMoreConv | <ul><li>Conv2D(filters=128, kernel=(3, 3), activation=relu)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>LeakyReLU(alpha=0.1)</li> <li>MaxPooling((2,2))</li> <li>Dropout(0.25)</li> <li>Flatten()</li> <li>Dense(64, activation=relu)</li> <li>Dropout(0.5)</li> <li>Dense(32, activation=relu)</li> <li>Dense(4, activation=softmax)</li></ul> |
+
+| Name | Loss | Accuracy | Validation Loss | Validation Accuracy |
+| ---- | ---- | -------- | --------------- | ------------------- |
+| ModelDefinitionTwoDense | 1.2345 | 0.4949 | 1.0191 | 0.6875 |
+| ModelDefinitionLeakyRelu | 1.2832 | 0.4655 | 1.0627 | 0.6625 |
+| ModelDefinitionLeakyReluMoreConv  | 1.3145 | 0.3952 | 1.1267 | 0.6525 |
 
 ## Authors
 
