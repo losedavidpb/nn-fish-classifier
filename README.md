@@ -40,7 +40,7 @@ obtained from a Kaggle dataset (see https://www.kaggle.com/crowww/a-large-scale-
 
 | Name  | Definition | Value |
 | ----  | ---------- | ----- |
-| Number of Epochs | Maximum number of iterations | 10 |
+| Number of Epochs | Maximum number of iterations | 30 |
 | Steps per Epoch  | Total steps of each epoch executed | 70 |
 | Batch size | Number of files loaded during training steps | 30 |
 | Patience   | Maximum tries to improve val_accuracy before exit | 3 |

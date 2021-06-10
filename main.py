@@ -1,7 +1,6 @@
 # --------------------------------------------
 # All Copyright reserved (c) based on LICENSE.
 # --------------------------------------------
-import keras.models
 
 from init_dataset import prepare_dataset, init_train_generator, restore_dataset
 from init_dataset import init_test_generator, delete_dataset
@@ -9,6 +8,7 @@ from visualizer import plot_history, plot_confusion_matrix
 from neural_network import define_model, train_model, test_model
 from utils import list_files, get_parent
 import tensorflow as tf
+import keras.models
 
 def _get_classes(path_classes):
     """Get current classes avoiding trash files. """
@@ -42,7 +42,7 @@ optimizer = tf.keras.optimizers.Adadelta()
 metrics = 'accuracy'
 
 # Training and EarlyStopping
-epochs = 10
+epochs = 30
 steps_per_epoch = 70
 batch_size = 30
 patience = 3
