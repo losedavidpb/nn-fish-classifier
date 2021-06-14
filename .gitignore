@@ -1,7 +1,5 @@
 .idea/*
 __pycache__/*
-dataset/train/*
-dataset/test/*
 *.h5
 *.docx
 *.png
