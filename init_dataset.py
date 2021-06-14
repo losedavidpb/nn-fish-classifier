@@ -4,7 +4,7 @@
 # --------------------------------------------
 
 from keras.preprocessing.image import ImageDataGenerator
-from utils import list_files, make_directory, remove_file
+from utils import list_files, make_directory
 from utils import get_filename, remove_files
 
 import random
@@ -152,15 +152,6 @@ def init_test_generator(**kwargs):
         class_mode=class_mode,
         shuffle=shuffle
     )
-
-def delete_dataset(classes):
-    """Delete current dataset that has passed classes."""
-    for class_name in classes:
-        remove_files('./dataset/train/' + class_name)
-        remove_files('./dataset/test/' + class_name)
-
-    remove_file('./dataset/train/')
-    remove_file('./dataset/test/')
 
 # _____________________ Private functions _____________________
 

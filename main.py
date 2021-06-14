@@ -3,9 +3,9 @@
 # --------------------------------------------
 
 from init_dataset import prepare_dataset, init_train_generator, restore_dataset
-from init_dataset import init_test_generator, delete_dataset
+from init_dataset import init_test_generator
 from visualizer import plot_history, plot_confusion_matrix
-from neural_network import define_model, train_model, test_model
+from neural_network import define_model, train_model
 from utils import list_files, get_parent
 import tensorflow as tf
 import keras.models
@@ -108,7 +108,7 @@ def _train_and_test(train_generator, test_generator):
         epochs=epochs, steps_per_epoch=steps_per_epoch, patience=patience
     )
 
-    test_model(model, test_generator, verbose_each_image=False)
+    # test_model(model, test_generator, verbose_each_image=False)
     return model, history
 
 def _visualize_results(history, model, test_generator):
