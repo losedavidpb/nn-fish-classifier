@@ -65,7 +65,7 @@ obtained from a Kaggle dataset (see https://www.kaggle.com/crowww/a-large-scale-
 
 | Name | Loss | Accuracy | Validation Loss | Validation Accuracy |
 | ---- | ---- | -------- | --------------- | ------------------- |
-| ModelDefinitionTwoDense | 1.2345 | 0.4949 | 1.0191 | 0.6875 |
+| ModelDefinitionTwoDense | 1.3293 | 0.3835 | 1.0921 | 0.7097 |
 | ModelDefinitionLeakyRelu | 1.2832 | 0.4655 | 1.0627 | 0.6625 |
 | ModelDefinitionLeakyReluMoreConv  | 1.3145 | 0.3952 | 1.1267 | 0.6525 |
 

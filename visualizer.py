@@ -5,7 +5,7 @@
 
 import cv2 as cv
 import numpy as np
-import seaborn as sns
+import mlxtend.plotting as mlx
 
 from matplotlib import pyplot as plt
 from sklearn.metrics import confusion_matrix
@@ -50,16 +50,14 @@ def plot_history(history):
 
 def plot_confusion_matrix(model, test_generator):
     """Plot the confusion matrix of current model using ImageDataGenerator testing instance. """
-    test_steps_per_epoch = np.math.ceil(test_generator.samples / test_generator.batch_size)
-
     y_expected = test_generator.classes
-    y_prediction = model.predict(test_generator, test_steps_per_epoch)
-    y_prediction = np.argmax(y_prediction, axis=1)
+    y_prediction = model.predict(test_generator)
 
+    y_prediction = np.argmax(y_prediction, axis=1)
     labels = test_generator.class_indices
 
-    cm = confusion_matrix(y_expected, y_prediction, normalize='all')
-    sns.heatmap(cm, annot=True, cmap="Spectral")
+    cm = confusion_matrix(y_expected, y_prediction)
+    mlx.plot_confusion_matrix(conf_mat=cm, figsize=(6, 6), cmap=plt.cm.Blues, show_normed=True)
 
     plt.title('Confusion Matrix of Fish Classifier')
     plt.xlabel('Predicted Label')

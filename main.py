@@ -43,13 +43,13 @@ metrics = 'accuracy'
 
 # Training and EarlyStopping
 epochs = 30
-steps_per_epoch = 70
+steps_per_epoch = 40
 batch_size = 30
 patience = 3
 
 # Data Augmentation
 class_mode = 'categorical'
-target_size = (200, 200)
+target_size = (250, 150)
 rescale = 1. / 255
 rotation_range = 30
 zoom_range = 0.7
@@ -83,7 +83,7 @@ def _init_generators():
         rescale=rescale,
         class_mode=class_mode,
         batch_size=batch_size,
-        suffle=False
+        suffle=True
     )
 
     return train_generator, test_generator

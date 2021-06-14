@@ -93,7 +93,7 @@ def init_train_generator(**kwargs):
     """
     batch_size = kwargs.get('batch_size', 20)
     class_mode = kwargs.get('class_mode', 'binary')
-    shuffle = kwargs.get('shuffle', True)
+    shuffle = kwargs.get('shuffle', False)
 
     target_size = kwargs.get('target_size', (150, 150))
     rescale = kwargs.get('rescale', 1. / 255)

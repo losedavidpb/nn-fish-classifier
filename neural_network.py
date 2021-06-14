@@ -4,15 +4,12 @@
 # --------------------------------------------
 
 import abc
-import numpy as np
 
-from PIL import Image
 from keras.models import Sequential
 from keras.callbacks import EarlyStopping
 from keras.layers import Dense, Dropout, Flatten, LeakyReLU
 from keras.layers import Conv2D, MaxPooling2D
 from keras.optimizer_v1 import SGD
-from utils import list_files, get_parent
 
 class ModelDefinition(abc.ABC):
     """Define new sequential models for neural networks. """
@@ -92,7 +89,7 @@ class ModelDefinitionTwoDense(ModelDefinition):
         input_shape1, input_shape2 = target_size
 
         model = Sequential()
-        model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(input_shape1, input_shape2, 3)))
+        model.add(Conv2D(32, kernel_size=(2, 2), activation='relu', input_shape=(input_shape1, input_shape2, 3)))
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.25))
         model.add(Flatten())
@@ -142,36 +139,3 @@ def train_model(model, train_generator, validation_generator, **kwargs):
     )
 
     return history
-
-def test_model(model, test_generator, verbose_each_image=True):
-    """Test passed model using a ImageDataGenerator testing instance. """
-    test_images = list_files('./dataset/test', mode='only_files')
-
-    input_shape1, input_shape2 = test_generator.target_size
-    classes = test_generator.class_indices
-    num_total, num_errors = len(test_images), 0
-
-    for image_dir in test_images:
-        img = Image.open(image_dir, 'r').convert('RGB')
-        img = np.asarray(img.resize((input_shape1, input_shape2)))
-        img = img.reshape(1, input_shape1, input_shape2, 3)
-
-        prediction = model.predict(img).flatten().tolist()
-        class_num = prediction.index(max(prediction))
-        expected = classes.get(get_parent(image_dir))
-
-        for class_name in classes.keys():
-            if classes.get(class_name) == class_num:
-                if class_num != expected: num_errors += 1
-
-                if verbose_each_image:
-                    str_format = "Image<{}>: It's a {}"
-                    print(str.format(str_format, image_dir, class_name), sep="")
-
-                break
-
-    num_correct = num_total - num_errors
-
-    print("Correct: ", num_correct)
-    print("Error: ", num_errors)
-    print("Total: ", num_total)
