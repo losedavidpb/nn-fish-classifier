@@ -31,7 +31,7 @@ class ModelDefinition(abc.ABC):
 
 # _________________ Versions of neural network models for fish classification _________________
 
-class ModelDefinitionLeakyRelu(ModelDefinition):
+class ModelDefinitionThreeConv(ModelDefinition):
     def define(self, num_classes, target_size, **kwargs):
         loss = kwargs.get('loss', 'mse')
         optimizer = kwargs.get('optimizer', SGD(lr=0.1))
@@ -40,8 +40,11 @@ class ModelDefinitionLeakyRelu(ModelDefinition):
         input_shape1, input_shape2 = target_size
 
         model = Sequential()
-        model.add(Conv2D(128, kernel_size=(3, 3), activation='relu', input_shape=(input_shape1, input_shape2, 3)))
-        model.add(LeakyReLU(alpha=0.1))
+        model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(input_shape1, input_shape2, 3)))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Conv2D(128, kernel_size=(3, 3), activation='relu'))
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.25))
         model.add(Flatten())
@@ -55,7 +58,7 @@ class ModelDefinitionLeakyRelu(ModelDefinition):
 
         return model
 
-class ModelDefinitionLeakyReluMoreConv(ModelDefinition):
+class ModelDefinitionOneConv(ModelDefinition):
     def define(self, num_classes, target_size, **kwargs):
         loss = kwargs.get('loss', 'mse')
         optimizer = kwargs.get('optimizer', SGD(lr=0.1))
@@ -65,8 +68,6 @@ class ModelDefinitionLeakyReluMoreConv(ModelDefinition):
 
         model = Sequential()
         model.add(Conv2D(128, kernel_size=(3, 3), activation='relu', input_shape=(input_shape1, input_shape2, 3)))
-        model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(LeakyReLU(alpha=0.1))
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.25))
         model.add(Flatten())
@@ -80,7 +81,7 @@ class ModelDefinitionLeakyReluMoreConv(ModelDefinition):
 
         return model
 
-class ModelDefinitionTwoDense(ModelDefinition):
+class ModelDefinitionTwoConv(ModelDefinition):
     def define(self, num_classes, target_size, **kwargs):
         loss = kwargs.get('loss', 'mse')
         optimizer = kwargs.get('optimizer', SGD(lr=0.1))
@@ -108,7 +109,7 @@ class ModelDefinitionTwoDense(ModelDefinition):
 
 def define_model(num_classes, target_size=(150, 150), **kwargs):
     """Return the best neural network model founded for fish classification. """
-    return ModelDefinitionLeakyReluMoreConv().define(num_classes, target_size, **kwargs)
+    return ModelDefinitionThreeConv().define(num_classes, target_size, **kwargs)
 
 # ________________________ Training and testing ________________________
 

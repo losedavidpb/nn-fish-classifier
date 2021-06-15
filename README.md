@@ -69,7 +69,11 @@ obtained from a Kaggle dataset (see https://www.kaggle.com/crowww/a-large-scale-
 | ModelDefinitionLeakyRelu | 1.2832 | 0.4655 | 1.0627 | 0.6625 |
 | ModelDefinitionLeakyReluMoreConv  | 1.3145 | 0.3952 | 1.1267 | 0.6525 |
 
-1. loss: 1.2537 - accuracy: 0.5282 - val_loss: 1.0885 - val_accuracy: 0.6775
+TwoConv: loss: 1.2537 - accuracy: 0.5282 - val_loss: 1.0885 - val_accuracy: 0.6775
+OneConv: loss: 1.2742 - accuracy: 0.4593 - val_loss: 0.9729 - val_accuracy: 0.7000
+ThreeConv: loss: 1.3756 - accuracy: 0.3024 - val_loss: 1.3326 - val_accuracy: 0.5450
+2. loss: 1.2016 - accuracy: 0.4935 - val_loss: 0.8814 - val_accuracy: 0.7013   
+3. loss: 1.3380 - accuracy: 0.3909 - val_loss: 1.2122 - val_accuracy: 0.6338
 
 ## Authors
 
