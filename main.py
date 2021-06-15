@@ -43,7 +43,7 @@ metrics = 'accuracy'
 
 # Training and EarlyStopping
 epochs = 30
-steps_per_epoch = 40
+steps_per_epoch = 100
 batch_size = 30
 patience = 3
 

@@ -89,7 +89,10 @@ class ModelDefinitionTwoDense(ModelDefinition):
         input_shape1, input_shape2 = target_size
 
         model = Sequential()
-        model.add(Conv2D(32, kernel_size=(2, 2), activation='relu', input_shape=(input_shape1, input_shape2, 3)))
+        model.add(Conv2D(64, kernel_size=(2, 2), activation='relu', input_shape=(input_shape1, input_shape2, 3)))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Dropout(0.25))
+        model.add(Conv2D(128,kernel_size=(2, 2), activation='relu'))
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.25))
         model.add(Flatten())
@@ -105,7 +108,7 @@ class ModelDefinitionTwoDense(ModelDefinition):
 
 def define_model(num_classes, target_size=(150, 150), **kwargs):
     """Return the best neural network model founded for fish classification. """
-    return ModelDefinitionTwoDense().define(num_classes, target_size, **kwargs)
+    return ModelDefinitionLeakyReluMoreConv().define(num_classes, target_size, **kwargs)
 
 # ________________________ Training and testing ________________________
 

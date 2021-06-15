@@ -69,6 +69,8 @@ obtained from a Kaggle dataset (see https://www.kaggle.com/crowww/a-large-scale-
 | ModelDefinitionLeakyRelu | 1.2832 | 0.4655 | 1.0627 | 0.6625 |
 | ModelDefinitionLeakyReluMoreConv  | 1.3145 | 0.3952 | 1.1267 | 0.6525 |
 
+1. loss: 1.2537 - accuracy: 0.5282 - val_loss: 1.0885 - val_accuracy: 0.6775
+
 ## Authors
 
 - losedavidpb: [https://github.com/losedavidpb](https://github.com/losedavidpb)
