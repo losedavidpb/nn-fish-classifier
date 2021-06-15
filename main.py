@@ -49,7 +49,7 @@ patience = 3
 
 # Data Augmentation
 class_mode = 'categorical'
-target_size = (250, 150)
+target_size = (250, 250)
 rescale = 1. / 255
 rotation_range = 30
 zoom_range = 0.7
@@ -147,7 +147,7 @@ def _ask_action_with_options(question, options_with_func):
 # ______________________ Main ______________________
 
 def _execute_for_train_test():
-    if _ask_for("Do you want to delete current dataset? "):
+    if _ask_for("Do you want to split current dataset to train/test folders? "):
         train_gen, test_gen = _prepare_dataset()
     else:
         train_gen, test_gen = _init_generators()
@@ -168,7 +168,7 @@ def _execute_for_train_test():
     _ask_for_action("Do you want to save current model? ", lambda: model.save(model_dir))
 
     # Cleaning dataset for next executions
-    _ask_for_action("Do you want to delete current dataset? ", lambda: restore_dataset(classes))
+    _ask_for_action("Do you want to restore current dataset? ", lambda: restore_dataset(classes))
 
 def _execute_for_use():
     model = keras.models.load_model(model_dir)
